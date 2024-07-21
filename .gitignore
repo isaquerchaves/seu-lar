@@ -1,0 +1,11 @@
+# Dependências do Node.js
+/node_modules
+
+# Dependências do back-end
+/back-end/node_modules
+
+# Arquivos de configuração do sistema
+*.log
+.env
+
+# Outros arquivos

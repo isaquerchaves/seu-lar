@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "sequelize": "^6.37.3"
+  },
+  "devDependencies": {
+    "@types/sequelize": "^4.28.20",
+    "prettier": "3.3.3"
+  }
+}
