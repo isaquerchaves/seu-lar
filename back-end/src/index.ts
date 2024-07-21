@@ -4,7 +4,7 @@ import immobileRoutes from './routes/immobileRoutes'
 import sequelize from './config/connection'
 
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 
 // Middleware para analisar o corpo das requisições JSON
 app.use(express.json())
