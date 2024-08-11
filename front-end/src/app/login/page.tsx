@@ -1,4 +1,6 @@
+"use client"
 import Image from "next/image";
+import {signIn} from 'next-auth/react'
 
 const Login = () => {
   return (
@@ -11,7 +13,7 @@ const Login = () => {
           Olá! Faça o Login com sua conta Google
         </p>
         <div className="flex flex-col justify-center items-center">
-          <button className="flex gap-1 items-center bg-white border border-white px-4 py-2 rounded-md shadow-sm hover:shadow-md cursor-pointer">
+          <button className="flex gap-1 items-center bg-white border border-white px-4 py-2 rounded-md shadow-sm hover:shadow-md cursor-pointer" onClick={() => signIn()}>
             <Image src="/google.webp" alt="Google" width={30} height={30} />
             <p>Entrar com o Google</p>
           </button>
