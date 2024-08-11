@@ -1,8 +1,21 @@
 "use client"
 import Image from "next/image";
-import {signIn} from 'next-auth/react'
+import {signIn, useSession } from 'next-auth/react'
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const Login = () => {
+  const {data: session} = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session) {
+      router.push('/');
+    }
+  }, [session, router]);
+
+  if (session) return null;
+
   return (
     <div className="h-screen w-screen flex flex-col bg-[#33ccff] md:flex-row md:bg-gray-100">
       <div className="flex flex-col justify-center items-center md:bg-[#33ccff] md:justify-center md:w-[500px]">
