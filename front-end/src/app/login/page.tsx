@@ -25,7 +25,7 @@ const Login = () => {
         <Image src="/logo.png" alt="Seu Lar Logo" width="400" height="400" />
       </div>
       <div className="flex flex-col justify-center items-center gap-10 md:gap-5 md:w-full">
-        <p className="text-xl text-white md:text-black">
+        <p className="px-4 text-xl text-white text-center md:text-black">
           Olá! Faça o Login com sua conta Google
         </p>
         <div className="flex flex-col justify-center items-center">
