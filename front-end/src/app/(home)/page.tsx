@@ -1,17 +1,22 @@
-"use client"
+"use client";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import Loading from "../components/Loading";
 
 export default function Home() {
-  const {data} = useSession();
+  const { data, status } = useSession();
   const router = useRouter();
 
   useEffect(() => {
-    if (!data) {
-      router.push('/login')
+    if (status === "unauthenticated") {
+      router.push("/login");
     }
-  }, [data, router]);
+  }, [status, router]);
+
+  if (status === "loading") {
+    return <Loading />;
+  }
 
   return (
     <>
