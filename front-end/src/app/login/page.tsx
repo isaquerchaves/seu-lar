@@ -3,7 +3,7 @@ import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import Loading from "../components/Loading";
+import Loading from "../../components/Loading";
 
 const Login = () => {
   const { data, status } = useSession();
