@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import immobileRoutes from './routes/immobileRoutes'
+import routes from './routes/routes'
 import sequelize from './config/connection'
 
 const app = express()
@@ -13,7 +13,7 @@ app.use(express.json())
 app.use(cors())
 
 // Rotas
-app.use('/api', immobileRoutes)
+app.use('/api', routes)
 
 // Inicializa o banco de dados e o servidor
 const startServer = async () => {
