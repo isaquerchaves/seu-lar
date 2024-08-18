@@ -9,11 +9,10 @@ import Button from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 
 interface IFormInput {
-  name: string;
-  email: string;
-  telefone: number;
-  cidade: string;
-  estado: string;
+  creci: string;
+  phone: number;
+  city: string;
+  state: string;
 }
 
 const Profile = () => {
@@ -55,23 +54,26 @@ const Profile = () => {
           type="text"
           placeholder={data?.user?.name || ""}
           disabled
-          {...register("name")}
         />
         <Input
           label="Email"
           type="text"
           placeholder={data?.user?.email || ""}
           disabled
-          {...register("email")}
         />
 
         <div className="flex gap-4 ">
-          <Input label="CRECI" type="text" name="creci" placeholder="12345" />
+          <Input
+            label="CRECI"
+            type="text"
+            placeholder="12345"
+            {...register("creci")}
+          />
           <Input
             label="Telefone"
             type="number"
             placeholder="99999999999"
-            {...register("telefone")}
+            {...register("phone")}
           />
         </div>
 
@@ -80,14 +82,47 @@ const Profile = () => {
             label="Cidade"
             type="text"
             placeholder="Imperatriz"
-            {...register("cidade")}
+            {...register("city")}
           />
-          <Input
-            label="Estado"
-            type="text"
-            placeholder="MA"
-            {...register("estado")}
-          />
+          {/* Select para Estado */}
+          <label className="w-full border border-gray-300 rounded-md p-2 mt-2 shadow-md bg-white">
+            <div className="flex flex-row text-sm font-medium border-none">
+              <p className="min-w-16">Estado*</p>
+              <select
+                {...register("state")}
+                className="pl-4 w-full border-none focus:outline-none"
+                defaultValue="MA"
+              >
+                <option value="AC">AC</option>
+                <option value="AL">AL</option>
+                <option value="AP">AP</option>
+                <option value="AM">AM</option>
+                <option value="BA">BA</option>
+                <option value="CE">CE</option>
+                <option value="DF">DF</option>
+                <option value="ES">ES</option>
+                <option value="GO">GO</option>
+                <option value="MA">MA</option>
+                <option value="MT">MT</option>
+                <option value="MS">MS</option>
+                <option value="MG">MG</option>
+                <option value="PA">PA</option>
+                <option value="PB">PB</option>
+                <option value="PR">PR</option>
+                <option value="PE">PE</option>
+                <option value="PI">PI</option>
+                <option value="RJ">RJ</option>
+                <option value="RN">RN</option>
+                <option value="RS">RS</option>
+                <option value="RO">RO</option>
+                <option value="RR">RR</option>
+                <option value="SC">SC</option>
+                <option value="SP">SP</option>
+                <option value="SE">SE</option>
+                <option value="TO">TO</option>
+              </select>
+            </div>
+          </label>
         </div>
 
         <div className="flex flex-col items-center gap-3 w-full pt-4">
