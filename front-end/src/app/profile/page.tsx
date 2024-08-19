@@ -9,6 +9,8 @@ import Button from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useFetchProfile } from "@/hooks/useFetch";
+import { CustomSession } from "../api/auth/[...nextauth]/route";
 
 interface IFormInput {
   creci: string;
@@ -31,6 +33,8 @@ const schema = yup.object().shape({
 const Profile = () => {
   const { data, status } = useSession();
   const router = useRouter();
+  const userId = (data as CustomSession)?.user?.id;
+  const { profile } = useFetchProfile(userId);
   const {
     register,
     handleSubmit,
