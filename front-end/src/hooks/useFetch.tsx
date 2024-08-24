@@ -2,11 +2,11 @@ import { fetchProfile, Profile } from "@/services/service";
 import { useEffect, useState } from "react";
 
 interface UseFetchProfileResult {
-  profile: Profile[] | null;
+  profile: Profile | null;
 }
 
 export function useFetchProfile(user_id: string): UseFetchProfileResult {
-  const [profile, setProfile] = useState<Profile[]>([]);
+  const [profile, setProfile] = useState<Profile | null>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -14,7 +14,6 @@ export function useFetchProfile(user_id: string): UseFetchProfileResult {
         try {
           const profileData = await fetchProfile(user_id);
           setProfile(profileData);
-          console.log(profileData);
         } catch (error) {
           console.log(error);
         }
