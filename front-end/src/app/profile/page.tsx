@@ -14,7 +14,7 @@ import { CustomSession } from "../api/auth/[...nextauth]/route";
 
 interface IFormInput {
   creci: string;
-  phone: number;
+  phone: string;
   city: string;
   state: string;
 }
@@ -23,7 +23,7 @@ interface IFormInput {
 const schema = yup.object().shape({
   creci: yup.string().required("Preencha o CRECI"),
   phone: yup
-    .number()
+    .string()
     .typeError("Preencha o Telefone")
     .required("Preencha o Telefone"),
   city: yup.string().required("Preencha a Cidade"),
@@ -39,6 +39,7 @@ const Profile = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<IFormInput>({ resolver: yupResolver(schema) });
 
   useEffect(() => {
@@ -46,6 +47,16 @@ const Profile = () => {
       router.push("/login");
     }
   }, [status, router]);
+
+  useEffect(() => {
+    // Preencher o formulário com os dados do perfil, se disponíveis
+    if (profile) {
+      setValue("creci", profile.creci || "");
+      setValue("phone", profile.phone || "");
+      setValue("city", profile.city || "");
+      setValue("state", profile.state || "MA");
+    }
+  }, [profile, setValue]);
 
   if (status === "loading") {
     return <Loading />;
