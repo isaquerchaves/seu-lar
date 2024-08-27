@@ -11,7 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useFetchProfile } from "@/hooks/useFetch";
 import { CustomSession } from "../api/auth/[...nextauth]/route";
-import { updateProfile } from "@/services/service";
+import { createProfile, updateProfile } from "@/services/service";
 
 interface IFormInput {
   creci: string;
@@ -66,13 +66,22 @@ const Profile = () => {
   const onSubmit = async (formData: IFormInput) => {
     try {
       if (userId) {
-        const updatedProfile = { ...formData, user_id: userId };
-        await updateProfile(userId, updatedProfile);
-        alert("Perfil atualizado com sucesso!");
+        const profileData = { ...formData, user_id: userId };
+
+        if (profile) {
+          await updateProfile(userId, profileData);
+          alert("Perfil atualizado com sucesso!");
+        } else {
+          await createProfile(profileData);
+          alert("Perfil criado com sucesso!");
+        }
+
+        // Redefinir a página ou atualizar o estado, conforme necessário
+        router.refresh();
       }
     } catch (error) {
-      console.error("Erro ao atualizar perfil: ", error);
-      alert("Erro ao atualizar perfil. Tente novamente.");
+      console.error("Erro ao salvar perfil: ", error);
+      alert("Erro ao salvar perfil. Tente novamente.");
     }
   };
 

@@ -31,3 +31,12 @@ export async function updateProfile(
     throw error;
   }
 }
+
+export async function createProfile(profileData: Profile): Promise<void> {
+  try {
+    await axios.post(`${API_BASE_URL}/profile/`, profileData);
+  } catch (error) {
+    console.error("Erro ao criar o Perfil: ", error);
+    throw error;
+  }
+}
