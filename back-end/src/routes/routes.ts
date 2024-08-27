@@ -4,6 +4,7 @@ import {
     getImmobileById,
 } from '../controllers/immobileController'
 import {
+    createProfile,
     getProfileByUserId,
     updateProfile,
 } from '../controllers/profileController'
@@ -15,5 +16,6 @@ router.get('/immobiles/:id', getImmobileById)
 
 router.get('/profile/:user_id', getProfileByUserId)
 router.put('/profile/:user_id', updateProfile)
+router.post('/profile', createProfile)
 
 export default router
