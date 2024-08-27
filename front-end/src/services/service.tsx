@@ -19,3 +19,15 @@ export async function fetchProfile(user_id: string): Promise<Profile | null> {
     return null;
   }
 }
+
+export async function updateProfile(
+  user_id: string,
+  profileData: Profile
+): Promise<void> {
+  try {
+    await axios.put(`${API_BASE_URL}/profile/${user_id}`, profileData);
+  } catch (error) {
+    console.error("Erro ao atualizar o Perfil: ", error);
+    throw error;
+  }
+}
