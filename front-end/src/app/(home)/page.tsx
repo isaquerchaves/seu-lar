@@ -3,16 +3,10 @@ import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Loading from "../../components/Loading";
+import Header from "@/components/Header";
 
 export default function Home() {
-  const { data, status } = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/login");
-    }
-  }, [status, router]);
+  const { status } = useSession();
 
   if (status === "loading") {
     return <Loading />;
@@ -20,9 +14,8 @@ export default function Home() {
 
   return (
     <>
+      <Header />
       <p>Home</p>
-      <p>{data?.user?.name}</p>
-      <button onClick={() => signOut()}>Logout</button>
     </>
   );
 }

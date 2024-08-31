@@ -14,7 +14,7 @@ const Button = ({
   return (
     <button
       type={type}
-      className={`shadow-md h-[50px] w-full border rounded-full text-white font-medium md:rounded-xl`}
+      className={`shadow-md h-full w-full border rounded-full text-white font-medium md:rounded-xl transform transition-all duration-300 ease-in-out hover:shadow-lg hover:scale-105 active:scale-95`}
       style={{ backgroundColor: color }}
       onClick={onClick}
     >
