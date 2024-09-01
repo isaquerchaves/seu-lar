@@ -2,12 +2,31 @@ import axios from "axios";
 
 const API_BASE_URL = "http://localhost:3001/api";
 
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  image: string;
+}
+
 export interface Profile {
   user_id: string;
   creci: string;
   phone: string;
   city: string;
   state: string;
+  User?: User; // Alterado para um objeto User
+}
+
+// PROFILE
+export async function fetchAllProfiles(): Promise<Profile[] | null> {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/profiles`);
+    return response.data.profiles || [];
+  } catch (error) {
+    console.log("Error fetching profiles: ", error);
+    return null;
+  }
 }
 
 export async function fetchProfile(user_id: string): Promise<Profile | null> {
