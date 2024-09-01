@@ -34,6 +34,13 @@ export const updateProfile = async (
             return
         }
 
+        // Verificar se o creci já existe em outro perfil
+        const existingCreci = await Profile.findOne({ where: { creci } })
+        if (existingCreci && existingCreci.id !== profile.id) {
+            res.status(400).json({ message: 'Creci já está em uso' })
+            return
+        }
+
         // Atualizar o perfil
         await profile.update({ creci, phone, city, state })
 
@@ -55,6 +62,12 @@ export const createProfile = async (
                 message: 'Todos os campos são obrigatórios',
             })
             return
+        }
+
+        // Verificar se o creci já existe em outro perfil
+        const existingCreci = await Profile.findOne({ where: { creci } })
+        if (existingCreci) {
+            res.status(400).json({ message: 'Creci já está em uso' })
         }
 
         const newProfile = await Profile.create({
