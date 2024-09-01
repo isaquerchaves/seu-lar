@@ -5,13 +5,13 @@ import { Sequelize } from 'sequelize'
 
 export const getAllProfiles = async (req: Request, res: Response) => {
     try {
-        const profilesWithUsers = await Profile.findAll({
+        const profiles = await Profile.findAll({
             include: {
                 model: User,
                 attributes: ['name', 'email', 'image'],
             },
         })
-        res.json(profilesWithUsers)
+        res.status(200).json({ profiles })
     } catch (error) {
         console.error('Erro ao buscar perfis:', error)
         res.status(500).json({ error: 'Erro ao buscar perfis' })
