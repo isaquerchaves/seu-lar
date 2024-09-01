@@ -1,5 +1,22 @@
 import { Request, Response } from 'express'
 import Profile from '../models/profile'
+import User from '../models/user'
+import { Sequelize } from 'sequelize'
+
+export const getAllProfiles = async (req: Request, res: Response) => {
+    try {
+        const profilesWithUsers = await Profile.findAll({
+            include: {
+                model: User,
+                attributes: ['name', 'email', 'image'],
+            },
+        })
+        res.json(profilesWithUsers)
+    } catch (error) {
+        console.error('Erro ao buscar perfis:', error)
+        res.status(500).json({ error: 'Erro ao buscar perfis' })
+    }
+}
 
 export const getProfileByUserId = async (
     req: Request,
