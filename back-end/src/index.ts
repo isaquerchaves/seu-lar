@@ -2,27 +2,24 @@ import express from 'express'
 import cors from 'cors'
 import routes from './routes/routes'
 import sequelize from './config/connection'
+import User from './models/user' // Corrigir caminho se necessário
+import Profile from './models/profile' // Corrigir caminho se necessário
 
 const app = express()
 const port = process.env.PORT || 3001
 
-// Middleware para analisar o corpo das requisições JSON
 app.use(express.json())
-
-// Middleware CORS
 app.use(cors())
-
-// Rotas
 app.use('/api', routes)
 
-// Inicializa o banco de dados e o servidor
+// Definir as associações entre os modelos
+Profile.belongsTo(User, { foreignKey: 'user_id', targetKey: 'id' })
+User.hasOne(Profile, { foreignKey: 'user_id', sourceKey: 'id' })
+
 const startServer = async () => {
     try {
-        // Sincroniza os modelos com o banco de dados
         await sequelize.sync({ force: false })
         console.log('Banco de dados sincronizado com sucesso.')
-
-        // Inicia o servidor
         app.listen(port, () => {
             console.log(`Servidor rodando na porta ${port}`)
         })

@@ -1,5 +1,6 @@
 import { DataTypes, Model, Optional } from 'sequelize'
 import sequelize from '../config/connection'
+import User from './user'
 
 interface ProfileAttributes {
     id: number
@@ -15,7 +16,6 @@ interface ProfileAttributes {
 
 interface ProfileCreationAttributes extends Optional<ProfileAttributes, 'id'> {}
 
-// Criando a classe do modelo Profile
 class Profile
     extends Model<ProfileAttributes, ProfileCreationAttributes>
     implements ProfileAttributes
@@ -31,7 +31,6 @@ class Profile
     public deletedAt?: Date
 }
 
-// Iniciando o modelo Profile
 Profile.init(
     {
         id: {
@@ -41,7 +40,7 @@ Profile.init(
         },
         user_id: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: false,
         },
         creci: {
             type: DataTypes.STRING,
@@ -85,5 +84,9 @@ Profile.init(
         timestamps: true,
     }
 )
+
+// Definições de associação
+Profile.belongsTo(User, { foreignKey: 'user_id', targetKey: 'id' })
+User.hasOne(Profile, { foreignKey: 'user_id', sourceKey: 'id' })
 
 export default Profile
