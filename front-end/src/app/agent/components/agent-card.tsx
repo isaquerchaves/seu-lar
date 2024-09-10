@@ -13,11 +13,11 @@ const AgentCard = ({ profile }: ProfileProps) => {
     <Link
       key={profile.user_id}
       href={`/agent/${profile.creci}`}
-      className="p-2 flex flex-col gap-2 border mt-4 rounded-lg shadow-md"
+      className="p-4 flex flex-col gap-2 border rounded-lg shadow-md transform transition-all duration-300 ease-in-out hover:shadow-lg hover:scale-105 active:scale-95"
     >
-      <div className="flex justify-between items-center">
-        <div className="flex gap-4 items-center">
-          <Avatar className="w-10 h-10">
+      <div className="flex justify-between items-center lg:justify-center lg:relative">
+        <div className="flex gap-2 items-center  lg:flex lg:flex-col">
+          <Avatar className="w-10 h-10 lg:w-[50px] lg:h-[50px]">
             <AvatarImage src={profile?.User?.image || undefined} />
             <AvatarFallback>{profile?.User?.image}</AvatarFallback>
           </Avatar>
@@ -30,14 +30,14 @@ const AgentCard = ({ profile }: ProfileProps) => {
           </div>
         </div>
 
-        <Link href={`/agent/#`}>
+        <Link href={`/agent/#`} className="lg:absolute lg:top-1 lg:right-1">
           <ExternalLink color="#808080" />
         </Link>
       </div>
 
       <Separator />
 
-      <div className="flex flex-row w-screen">
+      <div className="flex flex-row truncate">
         <div className="flex gap-2 items-center w-[50%]">
           <MapPinned size={20} color="#33ccff" />
           <p>
@@ -46,13 +46,13 @@ const AgentCard = ({ profile }: ProfileProps) => {
         </div>
         <div className="flex gap-2 items-center">
           <Phone size={20} color="#33ccff" />
-          <p>{profile.phone}</p>
+          <p className="">{profile.phone}</p>
         </div>
       </div>
 
       <div className="flex gap-2 items-center">
         <AtSign size={20} color="#33ccff" />
-        <p>{profile.User?.email}</p>
+        <p className="truncate">{profile.User?.email}</p>
       </div>
     </Link>
   );
