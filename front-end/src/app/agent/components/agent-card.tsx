@@ -11,7 +11,6 @@ interface ProfileProps {
 const AgentCard = ({ profile }: ProfileProps) => {
   return (
     <Link
-      key={profile.user_id}
       href={`/agent/${profile.creci}`}
       className="p-4 flex flex-col gap-2 border rounded-lg shadow-md transform transition-all duration-300 ease-in-out hover:shadow-lg hover:scale-105 active:scale-95"
     >
