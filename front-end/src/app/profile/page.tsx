@@ -77,7 +77,6 @@ const Profile = () => {
           alert("Perfil criado com sucesso!");
         }
 
-        // Redefinir a página ou atualizar o estado, conforme necessário
         router.refresh();
       }
     } catch (error) {
