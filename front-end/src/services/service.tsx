@@ -15,14 +15,15 @@ export interface Profile {
   phone: string;
   city: string;
   state: string;
-  User?: User;
+  userData?: User;
 }
 
 // PROFILE
 export async function fetchAllProfiles(): Promise<Profile[] | null> {
   try {
     const response = await axios.get(`${API_BASE_URL}/profiles`);
-    return response.data.profiles || [];
+    console.log('response:', response.data);
+    return response.data || [];
   } catch (error) {
     console.log("Error fetching profiles: ", error);
     return null;

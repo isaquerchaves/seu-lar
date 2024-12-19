@@ -17,12 +17,12 @@ const AgentCard = ({ profile }: ProfileProps) => {
       <div className="flex justify-between items-center lg:justify-center lg:relative">
         <div className="flex gap-2 items-center  lg:flex lg:flex-col">
           <Avatar className="w-10 h-10 lg:w-[50px] lg:h-[50px]">
-            <AvatarImage src={profile?.User?.image || undefined} />
-            <AvatarFallback>{profile?.User?.image}</AvatarFallback>
+            <AvatarImage src={profile?.userData?.image || undefined} />
+            <AvatarFallback>{profile?.userData?.image}</AvatarFallback>
           </Avatar>
 
           <div>
-            <p className="font-bold text-lg">{profile?.User?.name}</p>
+            <p className="font-bold text-lg">{profile?.userData?.name}</p>
             <p className="font-semibold text-gray-500">
               CRECI - {profile.creci}
             </p>
@@ -51,7 +51,7 @@ const AgentCard = ({ profile }: ProfileProps) => {
 
       <div className="flex gap-2 items-center">
         <AtSign size={20} color="#33ccff" />
-        <p className="truncate">{profile.User?.email}</p>
+        <p className="truncate">{profile.userData?.email}</p>
       </div>
     </Link>
   );
