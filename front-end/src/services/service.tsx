@@ -45,7 +45,7 @@ export async function updateProfile(
   profileData: Profile
 ): Promise<void> {
   try {
-    await axios.put(`${API_BASE_URL}/profiles`, profileData);
+    await axios.put(`${API_BASE_URL}/profiles/${user_id}`, profileData);
   } catch (error) {
     console.error("Erro ao atualizar o Perfil: ", error);
     throw error;
