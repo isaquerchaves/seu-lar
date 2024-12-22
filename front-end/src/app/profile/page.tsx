@@ -13,6 +13,8 @@ import { useFetchProfile } from "@/hooks/useFetch";
 import { CustomSession } from "../api/auth/[...nextauth]/route";
 import { createProfile, updateProfile } from "@/services/service";
 import Header from "@/components/Header";
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 interface IFormInput {
   creci: string;
@@ -71,23 +73,23 @@ const Profile = () => {
 
         if (profile) {
           await updateProfile(userId, profileData);
-          alert("Perfil atualizado com sucesso!");
+          toast.success("Perfil atualizado com sucesso!");
         } else {
           await createProfile(profileData);
-          alert("Perfil criado com sucesso!");
+          toast.success("Perfil criado com sucesso!");
         }
 
         router.refresh();
       }
     } catch (error) {
-      console.error("Erro ao salvar perfil: ", error);
-      alert("Erro ao salvar perfil. Tente novamente.");
+      toast.error("Erro ao salvar perfil!");
     }
   };
 
   return (
     <div>
       <Header />
+      <ToastContainer aria-label="Notificações" />
       <div className="flex flex-col items-center justify-between mt-10 h-full w-full">
         <form
           onSubmit={handleSubmit(onSubmit)}
