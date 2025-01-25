@@ -14,7 +14,6 @@ import { CustomSession } from "../api/auth/[...nextauth]/route";
 import { createProfile, updateProfile } from "@/services/service";
 import Header from "@/components/Header";
 import { toast, ToastContainer } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
 
 interface IFormInput {
   creci: string;
