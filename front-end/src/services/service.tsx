@@ -24,7 +24,7 @@ export interface Profile {
 // PROFILE
 export async function fetchAllProfiles(): Promise<Profile[] | null> {
   try {
-    const response = await axios.get(`${BASE_URL}/profiles`);
+    const response = await axios.get(`${BASE_URL}/profiles/active`);
     console.log('response:', response.data);
     return response.data || [];
   } catch (error) {
