@@ -86,7 +86,16 @@ const Header = () => {
               </div>
             </a>
           ) : (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 h-full">
+              <a href="/cadastro-imovel" className="w-40 h-full">
+                <div className="w-40 h-full">
+                  <Button
+                    text="Cadastrar Imóvel"
+                    type="button"
+                    color="#33ccff"
+                  />
+                </div>
+              </a> 
               <a href="/profile">
                 <Avatar className="w-9 h-9">
                   <AvatarImage src={data?.user?.image || undefined} />
@@ -182,6 +191,18 @@ const Header = () => {
                   </li>
                 </ul>
               </nav>
+              {status === "authenticated" && (
+              <a href="/cadastro-imovel">
+                <div className="w-full h-9 my-4">
+                  <Button
+                    text="Cadastrar Imóvel"
+                    type="button"
+                    color="#33ccff"
+                  />
+                </div>
+              </a>  
+              )}
+              
             </SheetContent>
           </Sheet>
         </>
