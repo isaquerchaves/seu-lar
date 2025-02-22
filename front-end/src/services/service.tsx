@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const BASE_URL = "https://seu-lar-back-production.up.railway.app" 
+const BASE_URL = "http://localhost:8080"; 
 
 export interface User {
   id: string;
@@ -21,11 +21,25 @@ export interface Profile {
   userData?: User;
 }
 
+export interface Immobile {
+  id: string;
+  title: string;
+  description: string;
+  district: string;
+  city: string;
+  state: string;
+  price: number;
+  status: boolean;
+  type: string;
+  purpose: string;
+  userId: string;
+  image_url: string[];
+}
+
 // PROFILE
 export async function fetchAllProfiles(): Promise<Profile[] | null> {
   try {
     const response = await axios.get(`${BASE_URL}/profiles/active`);
-    console.log('response:', response.data);
     return response.data || [];
   } catch (error) {
     console.log("Error fetching profiles: ", error);
@@ -60,6 +74,27 @@ export async function createProfile(profileData: Profile): Promise<void> {
     await axios.post(`${BASE_URL}/profiles`, profileData);
   } catch (error) {
     console.error("Erro ao criar o Perfil: ", error);
+    throw error;
+  }
+}
+
+// Immobiles
+export async function getAllImmobiles(): Promise<Immobile | null> {
+  try {
+    const response = await axios.get(`${BASE_URL}/immobiles`);
+    return response.data;
+  } catch (error) {
+    console.log("Erro ao buscar imóveis: ", error)
+    throw error;
+  }
+}
+
+export async function getImmobilesByUserId(user_id: string): Promise<Immobile | null> {
+  try {
+    const response = await axios.get(`${BASE_URL}/immobiles/user/${user_id}`);
+    return response.data;
+  } catch (error) {
+    console.log("Erro ao buscar imóveis: ", error)
     throw error;
   }
 }
