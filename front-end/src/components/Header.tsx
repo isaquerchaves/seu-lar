@@ -87,10 +87,10 @@ const Header = () => {
             </a>
           ) : (
             <div className="flex items-center gap-4 h-full">
-              <a href="/cadastro-imovel" className="w-40 h-full">
+              <a href="/meus-imoveis" className="w-40 h-full">
                 <div className="w-40 h-full">
                   <Button
-                    text="Cadastrar Imóvel"
+                    text="Meus Imóveis"
                     type="button"
                     color="#33ccff"
                   />
@@ -192,10 +192,10 @@ const Header = () => {
                 </ul>
               </nav>
               {status === "authenticated" && (
-              <a href="/cadastro-imovel">
+              <a href="/meus-imoveis">
                 <div className="w-full h-9 my-4">
                   <Button
-                    text="Cadastrar Imóvel"
+                    text="Meus Imóveis"
                     type="button"
                     color="#33ccff"
                   />
