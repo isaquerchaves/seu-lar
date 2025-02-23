@@ -1,4 +1,4 @@
-import { fetchAllProfiles, fetchProfile, Profile } from "@/services/service";
+import { fetchAllProfiles, fetchProfile, getAllImmobiles, getImmobilesByUserId, Immobile, Profile } from "@/services/service";
 import { useEffect, useState } from "react";
 
 interface UseFetchProfileResult {
@@ -7,6 +7,10 @@ interface UseFetchProfileResult {
 
 interface UseFetchProfilesResult {
   profiles: Profile[] | null;
+}
+
+interface UseFetchImmobilesResult {
+  immobiles: Immobile[] | null;
 }
 
 export function useFetchProfile(user_id: string): UseFetchProfileResult {
@@ -45,4 +49,41 @@ export function useFetchAllProfiles(): UseFetchProfilesResult {
   }, []);
 
   return { profiles };
+}
+
+// Immobiles
+export function useFetchAllImmobiles(): UseFetchImmobilesResult {
+  const [immobiles, setImmobiles] = useState<Immobile[] | null>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const immobilesData = await getAllImmobiles();
+        setImmobiles(immobilesData ? (Array.isArray(immobilesData) ? immobilesData : [immobilesData]) : null);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, [])
+
+  return {immobiles};
+}
+
+export function useFetchImmobilesByUserId(userId: string): UseFetchImmobilesResult {
+  const [immobiles, setImmobiles] = useState<Immobile[] | null>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const immobilesData = await getImmobilesByUserId(userId);
+        setImmobiles(immobilesData ? (Array.isArray(immobilesData) ? immobilesData : [immobilesData]) : null);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, [userId])
+
+  return {immobiles};
 }
